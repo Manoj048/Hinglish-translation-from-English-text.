@@ -1,0 +1,59 @@
+!pip install deep_translator
+nltk.download('stopwords')
+from deep_translator import GoogleTranslator
+import nltk
+
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+stop_words = set(stopwords.words('english'))
+
+def hinglish_translation(text):
+    translator=GoogleTranslator(source='auto', target='hi')
+    translated_text=translator.translate(text)
+    word_tokens = word_tokenize(text)
+    filtered_sentence = [w for w in word_tokens if not w.lower() in stop_words]
+    number_removal=[i for i in filtered_sentence if i.isalpha()]
+    text_translation=[]
+    for i in number_removal:
+        text_translation.append(translator.translate(i))
+        
+    for b,i in enumerate(text_translation):
+        if i in translated_text:
+            translated_text=translated_text.replace(i, number_removal[b])
+            
+    return translated_text
+nltk.download('punkt')
+from deep_translator import GoogleTranslator
+import nltk
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+stop_words = set(stopwords.words('english'))
+
+def english_translation(text):
+    translator1=GoogleTranslator(source='auto', target='en')
+    translated_text1=translator1.translate(text)
+    return translated_text1
+def hinglish_translation(text):
+    translator=GoogleTranslator(source='auto', target='hi')
+    translated_text=translator.translate(text)
+    word_tokens = word_tokenize(text)
+    filtered_sentence = [w for w in word_tokens if not w.lower() in stop_words]
+    number_removal=[i for i in filtered_sentence if i.isalpha()]
+    text_translation=[]
+    for i in number_removal:
+        text_translation.append(translator.translate(i))
+        
+    for b,i in enumerate(text_translation):
+        if i in translated_text:
+            translated_text=translated_text.replace(i, number_removal[b])
+            
+    return translated_text
+def final(text):
+    translated_text1=hinglish_translation(text)
+    english_translated=english_translation(translated_text1)
+    translated_text2=hinglish_translation(english_translated) 
+    return translated_text2
+final("Definitely share your feedback in the comment section")
+final("So even if it's a big video, I will clearly mention all the products")
+final("I was waiting for my bag.")
+final("I had about a 30 minute demo just using this new headset")
